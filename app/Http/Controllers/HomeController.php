@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product\Product;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -22,7 +23,9 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {
-        return view('home');
+    {   
+        $products = Product::select()->orderBy('id','desc')->take('4')->get();
+
+        return view('home', compact('products'));
     }
 }

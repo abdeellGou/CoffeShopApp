@@ -143,7 +143,7 @@
     </section>
 
     <section class="ftco-about d-md-flex">
-    	<div class="one-half img" style="background-image: url(images/about.jpg);"></div>
+    	<div class="one-half img" style="background-image: url({{ asset('assets/images/about.jpg')}};"></div>
     	<div class="one-half ftco-animate">
     		<div class="overlap">
 	        <div class="heading-section ftco-animate ">
@@ -211,22 +211,22 @@
     				<div class="row">
     					<div class="col-md-6">
     						<div class="menu-entry">
-		    					<a href="#" class="img" style="background-image: url(images/menu-1.jpg);"></a>
+		    					<a href="#" class="img" style="background-image: url({{ asset('assets/images/menu-1.jpg')}});"></a>
 		    				</div>
     					</div>
     					<div class="col-md-6">
     						<div class="menu-entry mt-lg-4">
-		    					<a href="#" class="img" style="background-image: url(images/menu-2.jpg);"></a>
+		    					<a href="#" class="img" style="background-image: url({{ asset('assets/images/menu-2.jpg')}});"></a>
 		    				</div>
     					</div>
     					<div class="col-md-6">
     						<div class="menu-entry">
-		    					<a href="#" class="img" style="background-image: url(images/menu-3.jpg);"></a>
+		    					<a href="#" class="img" style="background-image: url({{ asset('assets/images/menu-3.jpg')}});"></a>
 		    				</div>
     					</div>
     					<div class="col-md-6">
     						<div class="menu-entry mt-lg-4">
-		    					<a href="#" class="img" style="background-image: url(images/menu-4.jpg);"></a>
+		    					<a href="#" class="img" style="background-image: url({{ asset('assets/images/menu-4.jpg')}});"></a>
 		    				</div>
     					</div>
     				</div>
@@ -235,7 +235,7 @@
     	</div>
     </section>
 
-    <section class="ftco-counter ftco-bg-dark img" id="section-counter" style="background-image: url(images/bg_2.jpg);" data-stellar-background-ratio="0.5">
+    <section class="ftco-counter ftco-bg-dark img" id="section-counter" style="background-image: url({{ asset('assets/images/bg_2.jpg')}});" data-stellar-background-ratio="0.5">
 			<div class="overlay"></div>
       <div class="container">
         <div class="row justify-content-center">
@@ -292,52 +292,23 @@
             <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
           </div>
         </div>
+		
         <div class="row">
+		@foreach ($products as $product)
         	<div class="col-md-3">
         		<div class="menu-entry">
-    					<a href="#" class="img" style="background-image: url(images/menu-1.jpg);"></a>
+    					<a href="#" class="img" style="background-image: url({{ asset('assets/images/' . $product->image) }});"></a>
     					<div class="text text-center pt-4">
-    						<h3><a href="#">Coffee Capuccino</a></h3>
-    						<p>A small river named Duden flows by their place and supplies</p>
-    						<p class="price"><span>$5.90</span></p>
-    						<p><a href="product-single.html" class="btn btn-primary btn-outline-primary">Add to Cart</a></p>
+    						<h3><a href="{{ route('product.single',$product->id) }}">{{ $product->name }}</a></h3>
+    						<p>{{ $product->description }}</p>
+    						<p class="price"><span>${{ $product->price }}</span></p>
+    						<p><a href="{{ route('product.single',$product->id) }}" class="btn btn-primary btn-outline-primary">Show</a></p>
     					</div>
     				</div>
         	</div>
-        	<div class="col-md-3">
-        		<div class="menu-entry">
-    					<a href="#" class="img" style="background-image: url(images/menu-2.jpg);"></a>
-    					<div class="text text-center pt-4">
-    						<h3><a href="#">Coffee Capuccino</a></h3>
-    						<p>A small river named Duden flows by their place and supplies</p>
-    						<p class="price"><span>$5.90</span></p>
-    						<p><a href="#" class="btn btn-primary btn-outline-primary">Add to Cart</a></p>
-    					</div>
-    				</div>
-        	</div>
-        	<div class="col-md-3">
-        		<div class="menu-entry">
-    					<a href="#" class="img" style="background-image: url(images/menu-3.jpg);"></a>
-    					<div class="text text-center pt-4">
-    						<h3><a href="#">Coffee Capuccino</a></h3>
-    						<p>A small river named Duden flows by their place and supplies</p>
-    						<p class="price"><span>$5.90</span></p>
-    						<p><a href="#" class="btn btn-primary btn-outline-primary">Add to Cart</a></p>
-    					</div>
-    				</div>
-        	</div>
-        	<div class="col-md-3">
-        		<div class="menu-entry">
-    					<a href="#" class="img" style="background-image: url(images/menu-4.jpg);"></a>
-    					<div class="text text-center pt-4">
-    						<h3><a href="#">Coffee Capuccino</a></h3>
-    						<p>A small river named Duden flows by their place and supplies</p>
-    						<p class="price"><span>$5.90</span></p>
-    						<p><a href="#" class="btn btn-primary btn-outline-primary">Add to Cart</a></p>
-    					</div>
-    				</div>
-        	</div>
+			@endforeach
         </div>
+		
     	</div>
     </section>
 
@@ -345,28 +316,28 @@
     	<div class="container-wrap">
     		<div class="row no-gutters">
 					<div class="col-md-3 ftco-animate">
-						<a href="gallery.html" class="gallery img d-flex align-items-center" style="background-image: url(images/gallery-1.jpg);">
+						<a href="gallery.html" class="gallery img d-flex align-items-center" style="background-image: url({{ asset('assets/images/gallery-1.jpg')}});">
 							<div class="icon mb-4 d-flex align-items-center justify-content-center">
     						<span class="icon-search"></span>
     					</div>
 						</a>
 					</div>
 					<div class="col-md-3 ftco-animate">
-						<a href="gallery.html" class="gallery img d-flex align-items-center" style="background-image: url(images/gallery-3.jpg);">
+						<a href="gallery.html" class="gallery img d-flex align-items-center" style="background-image: url({{ asset('assets/images/gallery-3.jpg')}});">
 							<div class="icon mb-4 d-flex align-items-center justify-content-center">
     						<span class="icon-search"></span>
     					</div>
 						</a>
 					</div>
 					<div class="col-md-3 ftco-animate">
-						<a href="gallery.html" class="gallery img d-flex align-items-center" style="background-image: url(images/gallery-3.jpg);">
+						<a href="gallery.html" class="gallery img d-flex align-items-center" style="background-image: url({{ asset('assets/images/gallery-3.jpg')}});">
 							<div class="icon mb-4 d-flex align-items-center justify-content-center">
     						<span class="icon-search"></span>
     					</div>
 						</a>
 					</div>
 					<div class="col-md-3 ftco-animate">
-						<a href="gallery.html" class="gallery img d-flex align-items-center" style="background-image: url(images/gallery-4.jpg);">
+						<a href="gallery.html" class="gallery img d-flex align-items-center" style="background-image: url({{ asset('assets/images/gallery-4.jpg')}});">
 							<div class="icon mb-4 d-flex align-items-center justify-content-center">
     						<span class="icon-search"></span>
     					</div>
@@ -378,7 +349,7 @@
 
     
 
-    <section class="ftco-section img" id="ftco-testimony" style="background-image: url(images/bg_1.jpg);"  data-stellar-background-ratio="0.5">
+    <section class="ftco-section img" id="ftco-testimony" style="background-image: url({{ asset('assets/images/bg_1.jpg')}});"  data-stellar-background-ratio="0.5">
     	<div class="overlay"></div>
 	    <div class="container">
 	      <div class="row justify-content-center mb-5">
@@ -398,7 +369,7 @@
 	              </blockquote>
 	              <div class="author d-flex mt-4">
 	                <div class="image mr-3 align-self-center">
-	                  <img src="images/person_1.jpg" alt="">
+	                  <img src="{{ asset('assets/images/person_1.jpg')}}" alt="">
 	                </div>
 	                <div class="name align-self-center">Louise Kelly <span class="position">Illustrator Designer</span></div>
 	              </div>
@@ -411,7 +382,7 @@
 	              </blockquote>
 	              <div class="author d-flex mt-4">
 	                <div class="image mr-3 align-self-center">
-	                  <img src="images/person_2.jpg" alt="">
+	                  <img src="{{ asset('assets/images/person_2.jpg')}}" alt="">
 	                </div>
 	                <div class="name align-self-center">Louise Kelly <span class="position">Illustrator Designer</span></div>
 	              </div>
@@ -424,7 +395,7 @@
 	              </blockquote>
 	              <div class="author d-flex mt-4">
 	                <div class="image mr-3 align-self-center">
-	                  <img src="images/person_3.jpg" alt="">
+	                  <img src="{{ asset('assets/images/person_3.jpg')}}" alt="">
 	                </div>
 	                <div class="name align-self-center">Louise Kelly <span class="position">Illustrator Designer</span></div>
 	              </div>
@@ -437,7 +408,7 @@
 	              </blockquote>
 	              <div class="author d-flex mt-4">
 	                <div class="image mr-3 align-self-center">
-	                  <img src="images/person_2.jpg" alt="">
+	                  <img src="{{ asset('assets/images/person_2.jpg')}}" alt="">
 	                </div>
 	                <div class="name align-self-center">Louise Kelly <span class="position">Illustrator Designer</span></div>
 	              </div>
@@ -450,7 +421,7 @@
 	            </blockquote>
 	            <div class="author d-flex mt-4">
 	              <div class="image mr-3 align-self-center">
-	                <img src="images/person_3.jpg" alt="">
+	                <img src="{{ asset('assets/images/person_3.jpg')}}" alt="">
 	              </div>
 	              <div class="name align-self-center">Louise Kelly <span class="position">Illustrator Designer</span></div>
 	            </div>
