@@ -59,7 +59,24 @@
                         </span>
                     </div> -->
                 <!-- </div> -->
-                <p><a href="cart.html" class="btn btn-primary py-3 px-5">Add to Cart</a></p>
+                <form method="POST" action="{{ route('add.cart', $product->id) }} ">
+                    @csrf
+                    <input type="hidden" name="prod_id" value="{{ $product->id}}">
+                    <input type="hidden" name="name" value="{{ $product->name}}">
+                    <input type="hidden" name="price" value="{{ $product->price}}">
+                    <input type="hidden" name="image" value="{{ $product->image}}">
+                    @if ($checkingInCart == 0)
+                        <button  style="color:white !important;"  type="submit" name="submit"  class="btn btn-primary py-3 px-5  ">Add to Cart</button>
+                    @else
+                        <button style="text-color:azure;"  type="submit" name="submit" disabled  class="btn btn-dark py-3 px-5  ">Add to Cart</button>
+                    @endif
+                </form>
+
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
             </div>
         </div>
     </div>
@@ -80,7 +97,7 @@
             @foreach ( $relatedProducts as $related)
                 <div class="col-md-3">
                     <div class="menu-entry">
-                        <a href="{{route('product.single', $related->id)}}" class="img" style="background-image: url({{ asset('assets/images/'. $related->image) }});"></a>
+                        <a href="{{route('product.single', $related->id)}}" class="img" style="background-image: url({{ asset('assets/images/'.$related->image) }});"></a>
                         <div class="text text-center pt-4">
                             <h3><a href="{{route('product.single', $related->id)}}">{{$related->name}}</a></h3>
                             <p>{{$related->description}}</p>

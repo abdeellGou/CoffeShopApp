@@ -102,41 +102,73 @@
 	    		</div>
 	    		<div class="book p-4">
 	    			<h3>Book a Table</h3>
-	    			<form action="#" class="appointment-form">
+	    			<form action="{{ route('booking.table') }}" method="post" class="appointment-form">
+						@csrf
+
 	    				<div class="d-md-flex">
 		    				<div class="form-group">
-		    					<input type="text" class="form-control" placeholder="First Name">
+		    					<input type="text" name="first_name" class="form-control" placeholder="First Name">
+								@if($errors->has('first_name'))
+									<div class="text-warning">{{ $errors->first('first_name') }}</div>
+								@endif
 		    				</div>
+
 		    				<div class="form-group ml-md-4">
-		    					<input type="text" class="form-control" placeholder="Last Name">
+		    					<input type="text" name="last_name" class="form-control" placeholder="Last Name">
+								@if($errors->has('last_name'))
+									<div class="text-warning">{{ $errors->first('last_name') }}</div>
+								@endif
 		    				</div>
 	    				</div>
 	    				<div class="d-md-flex">
 		    				<div class="form-group">
 		    					<div class="input-wrap">
 		            		<div class="icon"><span class="ion-md-calendar"></span></div>
-		            		<input type="text" class="form-control appointment_date" placeholder="Date">
+		            		<input type="text" name="bookdate" class="form-control appointment_date" placeholder="Date">
+								@if($errors->has('bookdate'))
+									<div class="text-warning">{{ $errors->first('bookdate') }}</div>
+								@endif
 	            		</div>
 		    				</div>
 		    				<div class="form-group ml-md-4">
 		    					<div class="input-wrap">
 		            		<div class="icon"><span class="ion-ios-clock"></span></div>
-		            		<input type="text" class="form-control appointment_time" placeholder="Time">
+		            		<input type="text" name="time" class="form-control appointment_time" placeholder="Time">
+								@if($errors->has('time'))
+									<div class="text-warning">{{ $errors->first('time') }}</div>
+								@endif
 	            		</div>
 		    				</div>
 		    				<div class="form-group ml-md-4">
-		    					<input type="text" class="form-control" placeholder="Phone">
+		    					<input type="text" name="phone" class="form-control" placeholder="Phone">
+								@if($errors->has('phone'))
+									<div class="text-warning">{{ $errors->first('phone') }}</div>
+								@endif
 		    				</div>
 	    				</div>
 	    				<div class="d-md-flex">
 	    					<div class="form-group">
-		              <textarea name="" id="" cols="30" rows="2" class="form-control" placeholder="Message"></textarea>
-		            </div>
-		            <div class="form-group ml-md-4">
-		              <input type="submit" value="Appointment" class="btn btn-white py-3 px-4">
-		            </div>
-	    				</div>
+								<textarea name="message" id="" cols="30" rows="2" class="form-control" placeholder="Message"></textarea>
+								@if($errors->has('message'))
+									<div class="text-warning">{{ $errors->first('message') }}</div>
+								@endif
+							</div>
+							<div class="form-group ml-md-4">
+								<input type="submit" value="Book" class="btn btn-white py-3 px-4">
+							</div>
+						</div>
+							<div class="d-md-flex">
+								<div class="form-group ml-md-4">
+									@if (session('succes'))
+										<div class="text-success"><h3>{{ session('succes') }}</h3></div>
+
+									@endif
+								</div>
+							</div>
+
+
 	    			</form>
+
 	    		</div>
     		</div>
     	</div>
@@ -169,7 +201,7 @@
                 <h3 class="heading">Easy to Order</h3>
                 <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
               </div>
-            </div>      
+            </div>
           </div>
           <div class="col-md-4 ftco-animate">
             <div class="media d-block text-center block-6 services">
@@ -180,7 +212,7 @@
                 <h3 class="heading">Fastest Delivery</h3>
                 <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
               </div>
-            </div>      
+            </div>
           </div>
           <div class="col-md-4 ftco-animate">
             <div class="media d-block text-center block-6 services">
@@ -190,7 +222,7 @@
                 <h3 class="heading">Quality Coffee</h3>
                 <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
               </div>
-            </div>    
+            </div>
           </div>
         </div>
     	</div>
@@ -292,7 +324,7 @@
             <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
           </div>
         </div>
-		
+
         <div class="row">
 		@foreach ($products as $product)
         	<div class="col-md-3">
@@ -308,7 +340,7 @@
         	</div>
 			@endforeach
         </div>
-		
+
     	</div>
     </section>
 
@@ -347,7 +379,7 @@
     	</div>
     </section>
 
-    
+
 
     <section class="ftco-section img" id="ftco-testimony" style="background-image: url({{ asset('assets/images/bg_1.jpg')}});"  data-stellar-background-ratio="0.5">
     	<div class="overlay"></div>
@@ -395,7 +427,7 @@
 	              </blockquote>
 	              <div class="author d-flex mt-4">
 	                <div class="image mr-3 align-self-center">
-	                  <img src="{{ asset('assets/images/person_3.jpg')}}" alt="">
+	                  <img src="{{ asset('assets/images/person_3.jpg') }}" alt="">
 	                </div>
 	                <div class="name align-self-center">Louise Kelly <span class="position">Illustrator Designer</span></div>
 	              </div>
@@ -408,7 +440,7 @@
 	              </blockquote>
 	              <div class="author d-flex mt-4">
 	                <div class="image mr-3 align-self-center">
-	                  <img src="{{ asset('assets/images/person_2.jpg')}}" alt="">
+	                  <img src="{{ asset('assets/images/person_2.jpg') }}" alt="" >
 	                </div>
 	                <div class="name align-self-center">Louise Kelly <span class="position">Illustrator Designer</span></div>
 	              </div>
@@ -421,9 +453,9 @@
 	            </blockquote>
 	            <div class="author d-flex mt-4">
 	              <div class="image mr-3 align-self-center">
-	                <img src="{{ asset('assets/images/person_3.jpg')}}" alt="">
+	                <img src="{{ asset('assets/images/person_3.jpg')}} " alt="" >
 	              </div>
-	              <div class="name align-self-center">Louise Kelly <span class="position">Illustrator Designer</span></div>
+	              <div class="name align-self-center" > Louise Kelly <span class="position" >Illustrator Designer</span></div>
 	            </div>
 	          </div>
 	        </div>
